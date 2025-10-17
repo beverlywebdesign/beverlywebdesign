@@ -30,13 +30,13 @@ export default function Home() {
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
-    <div className="min-h-screen">
-      {/* Navigation */}
+    <div className="min-h-screen bg-surface-50">
+      {/* Navigation - Color Layer: surface-100 (elevated from page) */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50"
+        className="fixed top-0 w-full bg-surface-100 backdrop-blur-sm shadow-soft z-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -44,21 +44,24 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-2xl font-bold text-gray-900"
+              className="text-2xl font-bold text-surface-900"
             >
               Beverly Web Design
             </motion.div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8 items-center">
-              <a href="#services" className="text-gray-700 hover:text-gray-900 transition-colors">Services</a>
-              <a href="#portfolio" className="text-gray-700 hover:text-gray-900 transition-colors">Portfolio</a>
-              <a href="#about" className="text-gray-700 hover:text-gray-900 transition-colors">About</a>
+              <a href="#services" className="text-surface-700 hover:text-surface-900 transition-colors font-medium">Services</a>
+              <a href="#portfolio" className="text-surface-700 hover:text-surface-900 transition-colors font-medium">Portfolio</a>
+              <a href="#about" className="text-surface-700 hover:text-surface-900 transition-colors font-medium">About</a>
               <motion.a
                 href="#contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
+                className="bg-brand-600 text-white px-6 py-2.5 rounded-lg font-semibold shadow-soft hover:shadow-medium transition-all"
+                style={{
+                  boxShadow: '0 2px 4px -1px rgba(37, 99, 235, 0.2), 0 4px 6px -1px rgba(37, 99, 235, 0.3)'
+                }}
               >
                 Contact
               </motion.a>
@@ -68,11 +71,11 @@ export default function Home() {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="md:hidden p-2 rounded-lg hover:bg-surface-200 transition-colors"
               aria-label="Toggle menu"
             >
               <svg
-                className="w-6 h-6 text-gray-900"
+                className="w-6 h-6 text-surface-900"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -102,29 +105,29 @@ export default function Home() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={closeMobileMenu}
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              className="fixed inset-0 bg-surface-900/50 backdrop-blur-sm z-40 md:hidden"
             />
 
-            {/* Mobile Menu Drawer */}
+            {/* Mobile Menu Drawer - Most elevated surface */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-64 bg-white shadow-2xl z-50 md:hidden"
+              className="fixed top-0 right-0 bottom-0 w-72 bg-white shadow-elevated z-50 md:hidden"
             >
               <div className="flex flex-col h-full">
-                {/* Mobile Menu Header */}
-                <div className="flex justify-between items-center p-4 border-b border-gray-200">
-                  <span className="text-lg font-bold text-gray-900">Menu</span>
+                {/* Mobile Menu Header - surface-100 layer */}
+                <div className="flex justify-between items-center p-4 bg-surface-100 border-b border-surface-200">
+                  <span className="text-lg font-bold text-surface-900">Menu</span>
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={closeMobileMenu}
-                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="p-2 rounded-lg hover:bg-surface-200 transition-colors"
                     aria-label="Close menu"
                   >
                     <svg
-                      className="w-6 h-6 text-gray-900"
+                      className="w-6 h-6 text-surface-900"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -138,7 +141,7 @@ export default function Home() {
                 </div>
 
                 {/* Mobile Menu Links */}
-                <nav className="flex-1 overflow-y-auto">
+                <nav className="flex-1 overflow-y-auto bg-white">
                   <motion.div
                     variants={staggerContainer}
                     initial="initial"
@@ -151,11 +154,11 @@ export default function Home() {
                         href={link.href}
                         onClick={closeMobileMenu}
                         variants={fadeInUp}
-                        whileTap={{ scale: 0.98, backgroundColor: '#f3f4f6' }}
-                        className={`block px-6 py-4 text-lg font-medium transition-colors ${
+                        whileTap={{ scale: 0.98 }}
+                        className={`block px-6 py-4 text-lg font-medium transition-all ${
                           link.label === 'Contact'
-                            ? 'bg-blue-600 text-white hover:bg-blue-700 mx-4 rounded-lg text-center mt-4'
-                            : 'text-gray-900 hover:bg-gray-50 hover:text-blue-600'
+                            ? 'bg-brand-600 text-white hover:bg-brand-700 mx-4 rounded-lg text-center mt-4 shadow-medium'
+                            : 'text-surface-900 hover:bg-surface-100 hover:text-brand-600'
                         }`}
                       >
                         {link.label}
@@ -164,9 +167,9 @@ export default function Home() {
                   </motion.div>
                 </nav>
 
-                {/* Mobile Menu Footer */}
-                <div className="border-t border-gray-200 p-4">
-                  <p className="text-sm text-gray-600 text-center">
+                {/* Mobile Menu Footer - surface-100 layer */}
+                <div className="border-t border-surface-200 p-4 bg-surface-100">
+                  <p className="text-sm text-surface-600 text-center">
                     © 2024 Beverly Web Design
                   </p>
                 </div>
@@ -176,9 +179,9 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-blue-50 to-indigo-100 relative overflow-hidden">
-        {/* Animated background circles */}
+      {/* Hero Section - Color Layer: brand-50 (background) */}
+      <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-brand-50 to-brand-100 relative overflow-hidden">
+        {/* Animated background circles - deeper layers */}
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -189,7 +192,7 @@ export default function Home() {
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute top-0 right-0 w-96 h-96 bg-blue-200 rounded-full opacity-20 blur-3xl"
+          className="absolute top-0 right-0 w-96 h-96 bg-brand-200 rounded-full opacity-30 blur-3xl"
         />
         <motion.div
           animate={{
@@ -201,7 +204,7 @@ export default function Home() {
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-200 rounded-full opacity-20 blur-3xl"
+          className="absolute bottom-0 left-0 w-96 h-96 bg-brand-300 rounded-full opacity-30 blur-3xl"
         />
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -215,7 +218,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+              className="text-5xl md:text-6xl font-bold text-surface-900 mb-6 leading-tight"
             >
               Professional Web Design & Development Services
             </motion.h1>
@@ -223,7 +226,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="text-xl text-gray-600 mb-8 leading-relaxed"
+              className="text-xl text-surface-700 mb-8 leading-relaxed"
             >
               We create beautiful, high-performing websites that help your business grow.
               From design to launch, we handle everything.
@@ -236,17 +239,20 @@ export default function Home() {
             >
               <motion.a
                 href="#contact"
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all text-center shadow-lg"
+                className="bg-brand-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all text-center shadow-large hover:shadow-elevated"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, rgba(255,255,255,0.1), transparent)',
+                }}
               >
                 Get a Free Consultation
               </motion.a>
               <motion.a
                 href="#portfolio"
-                whileHover={{ scale: 1.05, borderColor: "#2563eb" }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-all border-2 border-blue-600 text-center shadow-md"
+                className="bg-white text-brand-600 px-8 py-4 rounded-lg text-lg font-semibold transition-all text-center shadow-medium hover:shadow-large border border-brand-200"
               >
                 View Our Work
               </motion.a>
@@ -255,8 +261,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 px-4 bg-white">
+      {/* Services Section - Color Layer: white (elevated from page) */}
+      <section id="services" className="py-20 px-4 bg-white relative">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -265,8 +271,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-            <p className="text-xl text-gray-600">Everything you need to succeed online</p>
+            <h2 className="text-4xl font-bold text-surface-900 mb-4">Our Services</h2>
+            <p className="text-xl text-surface-600">Everything you need to succeed online</p>
           </motion.div>
 
           <motion.div
@@ -274,7 +280,7 @@ export default function Home() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {[
               {
@@ -303,9 +309,9 @@ export default function Home() {
                 variants={fadeInUp}
                 whileHover={{
                   y: -8,
-                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                  transition: { type: "spring", stiffness: 300 }
                 }}
-                className="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition-all cursor-pointer border border-gray-100"
+                className="bg-surface-50 p-8 rounded-xl transition-all cursor-pointer shadow-soft hover:shadow-large group"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -313,12 +319,12 @@ export default function Home() {
                 >
                   {service.icon}
                 </motion.div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
+                <h3 className="text-xl font-bold text-surface-900 mb-3">{service.title}</h3>
+                <p className="text-surface-600 mb-4 leading-relaxed">{service.description}</p>
                 <motion.a
                   href="#contact"
                   whileHover={{ x: 5 }}
-                  className="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center"
+                  className="text-brand-600 font-semibold hover:text-brand-700 inline-flex items-center group-hover:text-brand-700"
                 >
                   Learn More →
                 </motion.a>
@@ -328,8 +334,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Portfolio Section */}
-      <section id="portfolio" className="py-20 px-4 bg-gray-50">
+      {/* Portfolio Section - Color Layer: surface-50 (background) */}
+      <section id="portfolio" className="py-20 px-4 bg-surface-50">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -338,8 +344,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Recent Projects</h2>
-            <p className="text-xl text-gray-600">See what we've built for our clients</p>
+            <h2 className="text-4xl font-bold text-surface-900 mb-4">Recent Projects</h2>
+            <p className="text-xl text-surface-600">See what we've built for our clients</p>
           </motion.div>
 
           <motion.div
@@ -350,9 +356,9 @@ export default function Home() {
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {[
-              { name: 'E-Commerce Store', category: 'Retail', color: 'from-purple-400 to-pink-400' },
-              { name: 'Restaurant Website', category: 'Hospitality', color: 'from-blue-400 to-cyan-400' },
-              { name: 'Corporate Site', category: 'Business', color: 'from-green-400 to-emerald-400' },
+              { name: 'E-Commerce Store', category: 'Retail', gradient: 'from-purple-500 to-pink-500' },
+              { name: 'Restaurant Website', category: 'Hospitality', gradient: 'from-brand-500 to-cyan-500' },
+              { name: 'Corporate Site', category: 'Business', gradient: 'from-green-500 to-emerald-500' },
             ].map((project, index) => (
               <motion.div
                 key={index}
@@ -360,28 +366,33 @@ export default function Home() {
                 className="group cursor-pointer"
               >
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className={`bg-gradient-to-br ${project.color} h-64 rounded-xl mb-4 flex items-center justify-center text-white text-2xl font-bold shadow-lg relative overflow-hidden`}
+                  className={`bg-gradient-to-br ${project.gradient} h-64 rounded-xl mb-4 flex items-center justify-center text-white text-2xl font-bold shadow-large hover:shadow-elevated relative overflow-hidden transition-all`}
+                  style={{
+                    backgroundImage: `linear-gradient(to bottom right, currentColor, currentColor), linear-gradient(to top, rgba(255,255,255,0.1), transparent)`
+                  }}
                 >
                   <motion.div
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
-                    className="absolute inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center"
+                    className="absolute inset-0 bg-surface-900/20 backdrop-blur-sm flex items-center justify-center transition-opacity"
                   >
-                    <span className="text-sm">View Project →</span>
+                    <span className="text-sm font-semibold bg-white text-surface-900 px-6 py-2 rounded-full shadow-medium">
+                      View Project →
+                    </span>
                   </motion.div>
                   <span className="relative z-10">{project.name}</span>
                 </motion.div>
-                <h3 className="text-xl font-bold text-gray-900">{project.name}</h3>
-                <p className="text-gray-600">{project.category}</p>
+                <h3 className="text-xl font-bold text-surface-900">{project.name}</h3>
+                <p className="text-surface-600">{project.category}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About Section - Color Layer: white (elevated) */}
       <section id="about" className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -391,8 +402,8 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7 }}
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Why Choose Beverly Web Design?</h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+              <h2 className="text-4xl font-bold text-surface-900 mb-6">Why Choose Beverly Web Design?</h2>
+              <p className="text-lg text-surface-700 mb-6 leading-relaxed">
                 We're a team of passionate designers and developers dedicated to creating
                 exceptional web experiences. With years of experience and hundreds of successful
                 projects, we know what it takes to build websites that work.
@@ -411,7 +422,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center text-gray-700"
+                    className="flex items-center text-surface-700 bg-surface-50 px-4 py-3 rounded-lg shadow-subtle"
                   >
                     <motion.span
                       whileHover={{ scale: 1.2 }}
@@ -430,15 +441,19 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-gradient-to-br from-blue-500 to-purple-600 h-96 rounded-xl shadow-2xl"
+              className="bg-gradient-to-br from-brand-500 to-purple-600 h-96 rounded-xl shadow-large hover:shadow-elevated transition-all"
+              style={{
+                backgroundImage: 'linear-gradient(to bottom right, rgba(59, 130, 246, 1), rgba(147, 51, 234, 1)), linear-gradient(to top, rgba(255,255,255,0.1), transparent)'
+              }}
             />
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Contact Section - Color Layer: surface-900 (deepest background) */}
+      <section id="contact" className="py-20 px-4 bg-surface-900 text-white relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-surface-800 to-surface-900" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -453,7 +468,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl text-gray-300 mb-8"
+            className="text-xl text-surface-300 mb-8"
           >
             Let's discuss how we can help bring your vision to life
           </motion.p>
@@ -466,9 +481,12 @@ export default function Home() {
           >
             <motion.a
               href="mailto:hello@beverlywebdesign.com"
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(59, 130, 246, 0.5)" }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all shadow-lg"
+              className="bg-brand-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all shadow-large hover:shadow-elevated"
+              style={{
+                backgroundImage: 'linear-gradient(to bottom, rgba(255,255,255,0.1), transparent)',
+              }}
             >
               Send Us an Email
             </motion.a>
@@ -476,7 +494,7 @@ export default function Home() {
               href="tel:+1234567890"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all shadow-lg"
+              className="bg-white text-surface-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all shadow-large hover:shadow-elevated"
             >
               Call Us Today
             </motion.a>
@@ -484,41 +502,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-950 text-gray-400 py-12 px-4">
+      {/* Footer - Color Layer: surface-900 (deepest) */}
+      <footer className="bg-surface-900 text-surface-400 py-12 px-4 border-t border-surface-800">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="text-white font-bold text-lg mb-4">Beverly Web Design</h3>
-              <p className="text-sm">Professional web design and development services.</p>
+              <p className="text-sm leading-relaxed">Professional web design and development services.</p>
             </div>
             <div>
               <h4 className="text-white font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#services" className="hover:text-white transition-colors">Web Design</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Development</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">E-Commerce</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">SEO</a></li>
+                <li><a href="#services" className="hover:text-brand-400 transition-colors">Web Design</a></li>
+                <li><a href="#services" className="hover:text-brand-400 transition-colors">Development</a></li>
+                <li><a href="#services" className="hover:text-brand-400 transition-colors">E-Commerce</a></li>
+                <li><a href="#services" className="hover:text-brand-400 transition-colors">SEO</a></li>
               </ul>
             </div>
             <div>
               <h4 className="text-white font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#portfolio" className="hover:text-white transition-colors">Portfolio</a></li>
-                <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+                <li><a href="#about" className="hover:text-brand-400 transition-colors">About</a></li>
+                <li><a href="#portfolio" className="hover:text-brand-400 transition-colors">Portfolio</a></li>
+                <li><a href="#contact" className="hover:text-brand-400 transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-brand-400 transition-colors">Blog</a></li>
               </ul>
             </div>
             <div>
               <h4 className="text-white font-semibold mb-4">Contact</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="mailto:hello@beverlywebdesign.com" className="hover:text-white transition-colors">hello@beverlywebdesign.com</a></li>
-                <li><a href="tel:+1234567890" className="hover:text-white transition-colors">+1 (234) 567-890</a></li>
+                <li><a href="mailto:hello@beverlywebdesign.com" className="hover:text-brand-400 transition-colors">hello@beverlywebdesign.com</a></li>
+                <li><a href="tel:+1234567890" className="hover:text-brand-400 transition-colors">+1 (234) 567-890</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-sm">
+          <div className="border-t border-surface-800 pt-8 text-center text-sm">
             <p>&copy; 2024 Beverly Web Design. All rights reserved.</p>
           </div>
         </div>
