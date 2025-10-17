@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -17,6 +18,17 @@ const staggerContainer = {
 };
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: '#services', label: 'Services' },
+    { href: '#portfolio', label: 'Portfolio' },
+    { href: '#about', label: 'About' },
+    { href: '#contact', label: 'Contact' },
+  ];
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -36,7 +48,9 @@ export default function Home() {
             >
               Beverly Web Design
             </motion.div>
-            <div className="hidden md:flex space-x-8">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex space-x-8 items-center">
               <a href="#services" className="text-gray-700 hover:text-gray-900 transition-colors">Services</a>
               <a href="#portfolio" className="text-gray-700 hover:text-gray-900 transition-colors">Portfolio</a>
               <a href="#about" className="text-gray-700 hover:text-gray-900 transition-colors">About</a>
@@ -49,9 +63,118 @@ export default function Home() {
                 Contact
               </motion.a>
             </div>
+
+            {/* Mobile Hamburger Button */}
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="w-6 h-6 text-gray-900"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {mobileMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </motion.button>
           </div>
         </div>
       </motion.nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={closeMobileMenu}
+              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            />
+
+            {/* Mobile Menu Drawer */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-64 bg-white shadow-2xl z-50 md:hidden"
+            >
+              <div className="flex flex-col h-full">
+                {/* Mobile Menu Header */}
+                <div className="flex justify-between items-center p-4 border-b border-gray-200">
+                  <span className="text-lg font-bold text-gray-900">Menu</span>
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    onClick={closeMobileMenu}
+                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    aria-label="Close menu"
+                  >
+                    <svg
+                      className="w-6 h-6 text-gray-900"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </motion.button>
+                </div>
+
+                {/* Mobile Menu Links */}
+                <nav className="flex-1 overflow-y-auto">
+                  <motion.div
+                    variants={staggerContainer}
+                    initial="initial"
+                    animate="animate"
+                    className="py-4"
+                  >
+                    {navLinks.map((link) => (
+                      <motion.a
+                        key={link.href}
+                        href={link.href}
+                        onClick={closeMobileMenu}
+                        variants={fadeInUp}
+                        whileTap={{ scale: 0.98, backgroundColor: '#f3f4f6' }}
+                        className={`block px-6 py-4 text-lg font-medium transition-colors ${
+                          link.label === 'Contact'
+                            ? 'bg-blue-600 text-white hover:bg-blue-700 mx-4 rounded-lg text-center mt-4'
+                            : 'text-gray-900 hover:bg-gray-50 hover:text-blue-600'
+                        }`}
+                      >
+                        {link.label}
+                      </motion.a>
+                    ))}
+                  </motion.div>
+                </nav>
+
+                {/* Mobile Menu Footer */}
+                <div className="border-t border-gray-200 p-4">
+                  <p className="text-sm text-gray-600 text-center">
+                    © 2024 Beverly Web Design
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-blue-50 to-indigo-100 relative overflow-hidden">
