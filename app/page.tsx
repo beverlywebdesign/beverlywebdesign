@@ -109,7 +109,7 @@ export default function Home() {
           {PROCESS_STEPS.map((step) => (
             <article key={step.label} className="border-t border-ink pt-6">
               <p className="text-[14px] font-medium text-mute">{step.num}</p>
-              <p className="section-label mt-3">{step.label}</p>
+              <p className="mt-3 text-[16px] font-semibold tracking-[-0.01em]">{step.label}</p>
               <h3 className="title-md mt-4">{step.title}</h3>
               <p className="mt-3 text-[16px] text-mute">{step.body}</p>
             </article>
@@ -129,7 +129,7 @@ export default function Home() {
 
       <section id="about" className="anchor-offset bg-ink text-paper" aria-labelledby="about-heading">
         <div className="page-wrap band-pad">
-          <p className="section-label text-paper/80">Beverly, Chicago</p>
+          <p className="text-[15px] text-paper/80">Beverly, Chicago</p>
           <h2 id="about-heading" className="display-h2 mt-4 max-w-[16ch]">
             We still write the code.
           </h2>

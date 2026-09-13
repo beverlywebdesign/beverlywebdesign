@@ -2,7 +2,6 @@
 
 @theme {
   --color-paper: #f7f7f5;
-  --color-paper-elevated: #ffffff;
   --color-elevated: #ffffff;
   --color-ink: #111111;
   --color-signal: #1a3aff;
@@ -47,8 +46,8 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-signal) 22%, transparent);
-    color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
   }
 }
 

@@ -48,7 +48,7 @@ export function ContactForm() {
       className="relative rounded-[12px] border border-line bg-elevated p-6 sm:p-8"
       noValidate
     >
-      <p className="section-label">Send a message</p>
+      <p className="text-[16px] font-semibold tracking-[-0.01em]">Send a message</p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <label className="block">

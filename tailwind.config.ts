@@ -15,7 +15,6 @@ const config: Config = {
       colors: {
         paper: "#F7F7F5",
         elevated: "#FFFFFF",
-        "paper-elevated": "#FFFFFF",
         ink: "#111111",
         signal: "#1A3AFF",
         line: "#D6D6D2",
