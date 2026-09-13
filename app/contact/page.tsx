@@ -12,10 +12,9 @@ export default function ContactPage() {
     <div id="contact" className="page-wrap section-pad">
       <div className="grid items-start gap-12 desk:grid-cols-2 desk:gap-16">
         <div>
-          <p className="kicker text-signal">Contact</p>
-          <h1 className="display-h2 mt-4 max-w-[14ch]">Tell us what you need built.</h1>
+          <h1 className="display-h2 max-w-[14ch]">Tell us what you need built.</h1>
           <p className="lead mt-6 max-w-[28rem]">
-            A site. A store. A workflow that takes a job off your plate. We will tell you if we are
+            A site. A store. A workflow that takes a job off your plate. We’ll tell you if we’re
             the right people for it.
           </p>
           <div className="mt-8 space-y-2">

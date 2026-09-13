@@ -9,7 +9,7 @@ import "./globals.css";
 const newsreader = Newsreader({
   subsets: ["latin"],
   weight: ["500"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   variable: "--font-newsreader",
   display: "swap",
 });
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "A site that brings in work. Web design and AI workflows — Beverly Web Design, Chicago.",
+        alt: "A site that brings in work. Web design and AI workflows. Beverly Web Design, Chicago.",
       },
     ],
   },

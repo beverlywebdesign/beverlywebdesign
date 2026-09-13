@@ -11,7 +11,8 @@ export const SITE = {
   country: "US",
   tagline: "Chicago web design. AI systems that do the work.",
   ogTitle: "A site that brings in work. | Beverly Web Design",
-  ogDescription: "Web design and AI workflows for Chicago businesses. Fast, clear, and set up so the right people can find you.",
+  ogDescription:
+    "Web design and AI workflows for Chicago businesses. Fast, clear, and set up so the right people can find you.",
 } as const;
 
 export const NAV = [
@@ -36,14 +37,16 @@ export const WORK = [
     href: "https://progressivechicago.org",
     domain: "progressivechicago.org",
     blurb: "Full church site. Sundays, pastor, ministries, events, kids.",
-    thumb: "pbc",
+    image: "/work/progressivechicago.jpg",
+    imageAlt: "Live Progressive Baptist Church homepage, progressivechicago.org",
   },
   {
     title: "Black Boy Literacy Campaign",
     href: "https://blackboylit.com",
     domain: "blackboylit.com",
     blurb: "Campaign site. Register, mentors, donate, mission.",
-    thumb: "bbl",
+    image: "/work/blackboylit.jpg",
+    imageAlt: "Live Black Boy Literacy Campaign homepage, blackboylit.com",
   },
 ] as const;
 
@@ -62,19 +65,16 @@ export const WORKFLOW_STEPS = [
 
 export const PROCESS_STEPS = [
   {
-    num: "01",
     label: "Call",
     title: "Thirty minutes.",
     body: "What you sell, who should find you, what working looks like.",
   },
   {
-    num: "02",
     label: "Build",
     title: "You see the real thing.",
     body: "Changes while still easy.",
   },
   {
-    num: "03",
     label: "Launch",
     title: "Live, tracked.",
     body: "Set up so the next edit is not a project.",

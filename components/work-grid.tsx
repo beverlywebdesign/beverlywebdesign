@@ -1,9 +1,5 @@
+import Image from "next/image";
 import { WORK } from "@/lib/site";
-
-const thumbs: Record<(typeof WORK)[number]["thumb"], string> = {
-  pbc: "work-thumb-pbc",
-  bbl: "work-thumb-bbl",
-};
 
 export function WorkGrid() {
   return (
@@ -13,9 +9,17 @@ export function WorkGrid() {
           key={item.domain}
           className="overflow-hidden rounded-[18px] bg-paper-elevated shadow-card"
         >
-          <div className={`work-thumb ${thumbs[item.thumb]}`} aria-hidden="true">
-            <span className="work-thumb-label">{item.domain}</span>
-          </div>
+          <a href={item.href} target="_blank" rel="noopener noreferrer" className="block">
+            <div className="work-thumb">
+              <Image
+                src={item.image}
+                alt={item.imageAlt}
+                fill
+                sizes="(min-width: 860px) 520px, 100vw"
+                className="object-cover object-top"
+              />
+            </div>
+          </a>
           <div className="px-6 pb-7 pt-6 sm:px-7">
             <h3 className="font-display text-[28px] font-medium tracking-[-0.02em] text-ink">
               {item.title}
@@ -28,7 +32,6 @@ export function WorkGrid() {
               rel="noopener noreferrer"
             >
               {item.domain}
-              <span aria-hidden="true">&nbsp;→</span>
             </a>
           </div>
         </article>
