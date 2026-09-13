@@ -56,7 +56,7 @@ function errorResponse(request: Request, error: string, status = 400) {
     return NextResponse.json({ ok: false, error }, { status });
   }
 
-  const url = new URL("/#contact", request.url);
+  const url = new URL("/contact", request.url);
   url.searchParams.set("error", error);
   return NextResponse.redirect(url, 303);
 }
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
   if (payload.company_website) {
     return wantsJson(request)
       ? NextResponse.json({ ok: true })
-      : NextResponse.redirect(new URL("/#contact?sent=1", request.url), 303);
+      : NextResponse.redirect(new URL("/contact?sent=1", request.url), 303);
   }
 
   if (!payload.name || !isEmail(payload.email)) {
@@ -129,5 +129,5 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, delivered: Boolean(apiKey) });
   }
 
-  return NextResponse.redirect(new URL("/#contact?sent=1", request.url), 303);
+  return NextResponse.redirect(new URL("/contact?sent=1", request.url), 303);
 }

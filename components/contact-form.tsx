@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { PROJECT_TYPES } from "@/lib/site";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -8,6 +8,18 @@ type Status = "idle" | "submitting" | "success" | "error";
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("sent") === "1") {
+      setStatus("success");
+      setMessage("Thanks. We have the details and will follow up shortly.");
+    }
+    if (params.get("error")) {
+      setStatus("error");
+      setMessage(params.get("error") || "Unable to send right now.");
+    }
+  }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
