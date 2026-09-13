@@ -96,37 +96,94 @@ export async function POST(request: Request) {
     payload.details || "(No project details)",
   ].join("\n");
 
+  const lead = {
+    source: "beverlywebdesign.com",
+    name: payload.name,
+    email: payload.email,
+    phone: payload.phone,
+    company: payload.company,
+    projectType,
+    details: payload.details,
+    submittedAt: new Date().toISOString(),
+  };
+
+  const webhookUrl = process.env.CONTACT_WEBHOOK_URL?.trim();
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL ?? SITE.email;
   const from = process.env.CONTACT_FROM_EMAIL ?? "Beverly Web Design <onboarding@resend.dev>";
 
-  if (apiKey) {
-    const resend = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: payload.email,
-        subject: `New inquiry from ${payload.name}`,
-        text,
-      }),
-    });
+  if (webhookUrl) {
+    try {
+      const webhook = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lead),
+        signal: AbortSignal.timeout(8_000),
+      });
 
-    if (!resend.ok) {
-      const detail = await resend.text();
-      console.error("Resend error", detail);
-      return errorResponse(request, "The message could not be delivered. Call or email us instead.", 502);
+      if (!webhook.ok) {
+        const detail = await webhook.text();
+        console.error("Contact webhook error", webhook.status, detail);
+        return errorResponse(
+          request,
+          "The message could not be delivered. Call or email us instead.",
+          502,
+        );
+      }
+    } catch (error) {
+      console.error("Contact webhook error", error);
+      return errorResponse(
+        request,
+        "The message could not be delivered. Call or email us instead.",
+        502,
+      );
     }
-  } else {
-    console.log("Contact inquiry (no RESEND_API_KEY configured)\n", text);
+  } else if (!apiKey) {
+    console.log("Contact inquiry (no CONTACT_WEBHOOK_URL or RESEND_API_KEY configured)\n", text);
+  }
+
+  if (apiKey) {
+    try {
+      const resend = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from,
+          to: [to],
+          reply_to: payload.email,
+          subject: `New inquiry from ${payload.name}`,
+          text,
+        }),
+      });
+
+      if (!resend.ok) {
+        const detail = await resend.text();
+        console.error("Resend error", detail);
+        if (!webhookUrl) {
+          return errorResponse(
+            request,
+            "The message could not be delivered. Call or email us instead.",
+            502,
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Resend error", error);
+      if (!webhookUrl) {
+        return errorResponse(
+          request,
+          "The message could not be delivered. Call or email us instead.",
+          502,
+        );
+      }
+    }
   }
 
   if (wantsJson(request)) {
-    return NextResponse.json({ ok: true, delivered: Boolean(apiKey) });
+    return NextResponse.json({ ok: true, delivered: Boolean(webhookUrl || apiKey) });
   }
 
   return NextResponse.redirect(new URL("/#contact?sent=1", request.url), 303);
