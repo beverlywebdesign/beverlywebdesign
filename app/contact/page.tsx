@@ -20,11 +20,11 @@ export default function ContactPage() {
           <div className="mt-8 space-y-2">
             <a
               href={`tel:${SITE.phoneTel}`}
-              className="block font-display text-[28px] font-medium tracking-[-0.02em]"
+              className="block text-[28px] font-semibold tracking-[-0.02em]"
             >
               {SITE.phoneDisplay}
             </a>
-            <a href={`mailto:${SITE.email}`} className="block text-[16px] hover:text-signal">
+            <a href={`mailto:${SITE.email}`} className="block text-[16px] text-ink">
               {SITE.email}
             </a>
           </div>

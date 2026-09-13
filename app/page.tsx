@@ -14,7 +14,7 @@ export default function Home() {
         <h1 id="hero-heading" className="display-h1 max-w-[12ch]">
           A site that
           <br />
-          brings in
+          <em className="italic">brings in</em>
           <br />
           work.
         </h1>
@@ -33,7 +33,7 @@ export default function Home() {
       </section>
 
       <section className="page-wrap pb-16 desk:pb-20" aria-labelledby="who-heading">
-        <div className="border-t border-ink/80 pt-8 desk:grid desk:grid-cols-[200px_1fr] desk:gap-10">
+        <div className="border-t border-ink pt-8 desk:grid desk:grid-cols-[200px_1fr] desk:gap-10">
           <h2 id="who-heading" className="section-label text-ink">
             Who it’s for
           </h2>
@@ -45,7 +45,7 @@ export default function Home() {
       </section>
 
       <section id="services" className="anchor-offset section-pad page-wrap" aria-labelledby="websites-heading">
-        <div className="grid gap-10 border-t border-mist pt-10 desk:grid-cols-2 desk:gap-16">
+        <div className="grid gap-10 border-t border-line pt-10 desk:grid-cols-2 desk:gap-16">
           <div>
             <h2 id="websites-heading" className="display-h2 max-w-[16ch]">
               Sites built to get you found and chosen.
@@ -60,20 +60,20 @@ export default function Home() {
               {WEBSITE_BULLETS.map((item) => (
                 <li
                   key={item}
-                  className="border-t border-mist py-4 text-[16px] text-ink desk:text-[17px]"
+                  className="border-t border-line py-4 text-[16px] text-ink desk:text-[17px]"
                 >
                   {item}
                 </li>
               ))}
             </ul>
-            <a href="#contact" className="tap mt-2 text-[16px] font-medium text-signal">
+            <a href="#contact" className="tap mt-2 text-[16px] font-medium text-ink">
               Start a website
             </a>
           </div>
         </div>
       </section>
 
-      <section id="workflows" className="anchor-offset bg-code-bg text-paper" aria-labelledby="workflows-heading">
+      <section id="workflows" className="anchor-offset bg-ink text-paper" aria-labelledby="workflows-heading">
         <div className="page-wrap band-pad">
           <h2 id="workflows-heading" className="display-h2 max-w-[16ch]">
             Systems that do the repeat work.
@@ -82,7 +82,7 @@ export default function Home() {
             We design and deploy autonomous workflows for the parts of the business that eat your
             week: intake, follow-up, content, scheduling, internal ops.
           </p>
-          <p className="mt-4 max-w-[36rem] text-[16px] text-paper/75">
+          <p className="mt-4 max-w-[36rem] text-[16px] text-paper/80">
             Deployed, not decked. Not a chatbot bolted onto a footer.
           </p>
           <a href="#contact" className="btn btn-primary mt-8">
@@ -91,11 +91,9 @@ export default function Home() {
 
           <div className="mt-12 grid grid-cols-2 gap-3 desk:grid-cols-4">
             {WORKFLOW_STEPS.map((step) => (
-              <article key={step.num} className="rounded-[18px] bg-code-card px-4 py-6 sm:px-5">
-                <p className="font-mono text-[13px] text-paper/75">{step.num}</p>
-                <h3 className="mt-6 font-display text-[24px] font-medium tracking-[-0.02em] sm:text-[28px]">
-                  {step.title}
-                </h3>
+              <article key={step.num} className="flow-card">
+                <p className="text-[14px] font-medium text-paper/75">{step.num}</p>
+                <h3 className="title-md mt-5 text-paper">{step.title}</h3>
                 <p className="mt-2 text-[15px] text-paper/75">{step.detail}</p>
               </article>
             ))}
@@ -109,9 +107,10 @@ export default function Home() {
         </h2>
         <div className="mt-12 grid gap-10 desk:grid-cols-3 desk:gap-8">
           {PROCESS_STEPS.map((step) => (
-            <article key={step.label} className="border-t-2 border-ink pt-6">
-              <p className="section-label">{step.label}</p>
-              <h3 className="display-h3 mt-5">{step.title}</h3>
+            <article key={step.label} className="border-t border-ink pt-6">
+              <p className="text-[14px] font-medium text-mute">{step.num}</p>
+              <p className="section-label mt-3">{step.label}</p>
+              <h3 className="title-md mt-4">{step.title}</h3>
               <p className="mt-3 text-[16px] text-mute">{step.body}</p>
             </article>
           ))}
@@ -157,11 +156,11 @@ export default function Home() {
             <div className="mt-8 space-y-2">
               <a
                 href={`tel:${SITE.phoneTel}`}
-                className="block font-display text-[28px] font-medium tracking-[-0.02em] text-ink"
+                className="block text-[28px] font-semibold tracking-[-0.02em] text-ink"
               >
                 {SITE.phoneDisplay}
               </a>
-              <a href={`mailto:${SITE.email}`} className="block text-[16px] text-ink hover:text-signal">
+              <a href={`mailto:${SITE.email}`} className="block text-[16px] text-ink">
                 {SITE.email}
               </a>
             </div>

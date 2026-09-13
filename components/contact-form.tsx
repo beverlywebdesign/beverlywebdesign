@@ -45,7 +45,7 @@ export function ContactForm() {
       onSubmit={onSubmit}
       action="/api/contact"
       method="POST"
-      className="relative rounded-[18px] bg-paper-elevated p-6 shadow-card sm:p-8"
+      className="relative rounded-[12px] border border-line bg-elevated p-6 sm:p-8"
       noValidate
     >
       <p className="section-label">Send a message</p>
@@ -125,7 +125,7 @@ export function ContactForm() {
 
       {message ? (
         <p
-          className={`mt-4 text-[15px] ${status === "error" ? "text-signal-deep" : "text-mute"}`}
+          className={`mt-4 text-[15px] ${status === "error" ? "text-ink" : "text-mute"}`}
           role="status"
         >
           {message}

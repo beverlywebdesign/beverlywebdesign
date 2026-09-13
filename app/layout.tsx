@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Newsreader, Plus_Jakarta_Sans } from "next/font/google";
+import { Newsreader, Plus_Jakarta_Sans } from "next/font/google";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -9,7 +9,7 @@ import "./globals.css";
 const newsreader = Newsreader({
   subsets: ["latin"],
   weight: ["500"],
-  style: ["normal"],
+  style: ["normal", "italic"],
   variable: "--font-newsreader",
   display: "swap",
 });
@@ -18,13 +18,6 @@ const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-plus-jakarta",
-  display: "swap",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-ibm-plex-mono",
   display: "swap",
 });
 
@@ -70,10 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${newsreader.variable} ${plusJakarta.variable} ${ibmPlexMono.variable}`}
-    >
+    <html lang="en" className={`${newsreader.variable} ${plusJakarta.variable}`}>
       <body className="min-h-screen bg-paper font-ui text-ink antialiased">
         <a href="#main" className="skip-link">
           Skip to content

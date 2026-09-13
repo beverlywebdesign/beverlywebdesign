@@ -37,7 +37,7 @@ export const WORK = [
     href: "https://progressivechicago.org",
     domain: "progressivechicago.org",
     blurb: "Full church site. Sundays, pastor, ministries, events, kids.",
-    image: "/work/progressivechicago.jpg",
+    image: "/work-pbc.png",
     imageAlt: "Live Progressive Baptist Church homepage, progressivechicago.org",
   },
   {
@@ -45,7 +45,7 @@ export const WORK = [
     href: "https://blackboylit.com",
     domain: "blackboylit.com",
     blurb: "Campaign site. Register, mentors, donate, mission.",
-    image: "/work/blackboylit.jpg",
+    image: "/work-bbl.png",
     imageAlt: "Live Black Boy Literacy Campaign homepage, blackboylit.com",
   },
 ] as const;
@@ -57,24 +57,27 @@ export const WEBSITE_BULLETS = [
 ] as const;
 
 export const WORKFLOW_STEPS = [
-  { num: "01", title: "Intake", detail: "form to CRM" },
-  { num: "02", title: "Qualify", detail: "score and route" },
-  { num: "03", title: "Follow-up", detail: "draft and send" },
-  { num: "04", title: "Schedule", detail: "booked" },
+  { num: "1", title: "Intake", detail: "form to CRM" },
+  { num: "2", title: "Qualify", detail: "score and route" },
+  { num: "3", title: "Follow-up", detail: "draft and send" },
+  { num: "4", title: "Schedule", detail: "booked" },
 ] as const;
 
 export const PROCESS_STEPS = [
   {
+    num: "1",
     label: "Call",
     title: "Thirty minutes.",
     body: "What you sell, who should find you, what working looks like.",
   },
   {
+    num: "2",
     label: "Build",
     title: "You see the real thing.",
     body: "Changes while still easy.",
   },
   {
+    num: "3",
     label: "Launch",
     title: "Live, tracked.",
     body: "Set up so the next edit is not a project.",
