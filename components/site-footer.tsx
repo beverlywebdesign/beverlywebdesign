@@ -8,6 +8,10 @@ export function SiteFooter() {
         <p className="flex flex-wrap items-center gap-x-2">
           <span>{SITE.name}</span>
           <span aria-hidden="true">·</span>
+          <a href={`tel:${SITE.phoneTel}`} className="hover:text-paper">
+            {SITE.phoneDisplay}
+          </a>
+          <span aria-hidden="true">·</span>
           <a href={`mailto:${SITE.email}`} className="hover:text-paper">
             {SITE.email}
           </a>

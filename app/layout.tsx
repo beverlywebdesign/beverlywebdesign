@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Newsreader, Plus_Jakarta_Sans } from "next/font/google";
+import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SITE } from "@/lib/site";
@@ -27,30 +28,36 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const description =
-  "We design and build websites for Chicago businesses. Fast, clear, and set up so the right people can find you and get in touch.";
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://beverlywebdesign.com"),
+  metadataBase: new URL(SITE.url),
   title: {
-    default: "Chicago Web Design | Beverly Web Design",
+    default: SITE.ogTitle,
     template: "%s | Beverly Web Design",
   },
-  description,
+  description: SITE.ogDescription,
   keywords: ["Chicago web design", "Beverly Web Design", "AI workflows", "small business websites"],
   authors: [{ name: SITE.name }],
   openGraph: {
-    title: "Chicago Web Design | Beverly Web Design",
-    description,
-    url: "https://beverlywebdesign.com",
+    title: SITE.ogTitle,
+    description: SITE.ogDescription,
+    url: SITE.url,
     siteName: SITE.name,
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "A site that brings in work. Web design and AI workflows — Beverly Web Design, Chicago.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chicago Web Design | Beverly Web Design",
-    description,
+    title: SITE.ogTitle,
+    description: SITE.ogDescription,
+    images: ["/og.png"],
   },
   alternates: {
     canonical: "/",
@@ -68,8 +75,12 @@ export default function RootLayout({
       className={`${newsreader.variable} ${plusJakarta.variable} ${ibmPlexMono.variable}`}
     >
       <body className="min-h-screen bg-paper font-ui text-ink antialiased">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+        <JsonLd />
         <SiteHeader />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <SiteFooter />
       </body>
     </html>

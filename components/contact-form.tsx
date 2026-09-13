@@ -45,33 +45,45 @@ export function ContactForm() {
       onSubmit={onSubmit}
       action="/api/contact"
       method="POST"
-      className="rounded-[18px] bg-paper-elevated p-6 shadow-card sm:p-8"
+      className="relative rounded-[18px] bg-paper-elevated p-6 shadow-card sm:p-8"
       noValidate
     >
-      <p className="kicker text-signal">Or send the details</p>
+      <p className="kicker text-signal">Send a message</p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <label className="block">
-          <span className="field-label">Name</span>
-          <input className="field-input" name="name" type="text" placeholder="Your name" required />
+          <span className="field-label">
+            Name <span aria-hidden="true">*</span>
+          </span>
+          <input
+            className="field-input"
+            name="name"
+            type="text"
+            autoComplete="name"
+            required
+            aria-required="true"
+          />
         </label>
         <label className="block">
-          <span className="field-label">Email</span>
+          <span className="field-label">
+            Email <span aria-hidden="true">*</span>
+          </span>
           <input
             className="field-input"
             name="email"
             type="email"
-            placeholder="you@company.com"
+            autoComplete="email"
             required
+            aria-required="true"
           />
         </label>
         <label className="block">
           <span className="field-label">Phone</span>
-          <input className="field-input" name="phone" type="tel" placeholder="773-…" />
+          <input className="field-input" name="phone" type="tel" autoComplete="tel" />
         </label>
         <label className="block">
           <span className="field-label">Company</span>
-          <input className="field-input" name="company" type="text" placeholder="Business name" />
+          <input className="field-input" name="company" type="text" autoComplete="organization" />
         </label>
       </div>
 
@@ -88,27 +100,27 @@ export function ContactForm() {
 
       <label className="mt-4 block">
         <span className="field-label">Project details</span>
-        <textarea
-          className="field-input"
-          name="details"
-          placeholder="What do you need built?"
-          rows={5}
-        />
+        <textarea className="field-input" name="details" rows={5} />
       </label>
 
-      <div className="hidden" aria-hidden="true">
+      <div className="hp" aria-hidden="true">
         <label>
           Company website
           <input name="company_website" type="text" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
 
+      <p className="mt-5 text-[13px] leading-relaxed text-mute">
+        We use your phone and email only to reply about this project. No newsletters, no list
+        selling.
+      </p>
+
       <button
         type="submit"
         className="btn btn-primary mt-6 w-full disabled:cursor-not-allowed disabled:opacity-70"
         disabled={status === "submitting"}
       >
-        {status === "submitting" ? "Sending…" : "Send"}
+        {status === "submitting" ? "Sending…" : "Send message"}
       </button>
 
       {message ? (
