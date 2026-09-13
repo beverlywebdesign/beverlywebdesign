@@ -10,16 +10,16 @@ export default function ServicesPage() {
   return (
     <div className="page-wrap section-pad">
       <div className="grid gap-10 desk:grid-cols-2">
-        <article className="rounded-[18px] border border-mist bg-paper-elevated p-8">
+        <article className="rounded-[12px] border border-line bg-elevated p-8">
           <h1 className="display-h2 max-w-[16ch]">Sites built to get you found and chosen.</h1>
           <p className="lead mt-4">
             Fast, clear sites set up so Chicago customers can actually reach you.
           </p>
-          <a href="/#contact" className="tap mt-6 text-signal">
+          <a href="/#contact" className="tap mt-6 text-ink">
             Start a website
           </a>
         </article>
-        <article className="rounded-[18px] bg-code-bg p-8 text-paper">
+        <article className="rounded-[12px] bg-ink p-8 text-paper">
           <h2 className="display-h2">Systems that do the repeat work.</h2>
           <p className="mt-4 text-[16px] text-paper/80">
             Deployed, not decked. Not a chatbot bolted onto a footer.
