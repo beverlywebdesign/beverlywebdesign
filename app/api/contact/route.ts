@@ -108,15 +108,29 @@ export async function POST(request: Request) {
   };
 
   const webhookUrl = process.env.CONTACT_WEBHOOK_URL?.trim();
+  const webhookAuthorization = process.env.CONTACT_WEBHOOK_AUTHORIZATION?.trim();
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL ?? SITE.email;
   const from = process.env.CONTACT_FROM_EMAIL ?? "Beverly Web Design <onboarding@resend.dev>";
 
   if (webhookUrl) {
+    if (!webhookAuthorization) {
+      console.warn(
+        "CONTACT_WEBHOOK_URL is set but CONTACT_WEBHOOK_AUTHORIZATION is missing; posting without Authorization",
+      );
+    }
+
     try {
+      const webhookHeaders: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+      if (webhookAuthorization) {
+        webhookHeaders.Authorization = webhookAuthorization;
+      }
+
       const webhook = await fetch(webhookUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: webhookHeaders,
         body: JSON.stringify(lead),
         signal: AbortSignal.timeout(8_000),
       });
